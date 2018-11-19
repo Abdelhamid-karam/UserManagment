@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "firstName": "Ahmed",
+      "lastName": "Abdel Wahab",
+      "email": "ahmed.abdelwahab123@nagwa.com",
+      "userName": "ahmed.abdelwahab123",
+      "birthDate": "1993-12-15",
+      "plainPassword": "123456"
+    }
+  ],
+  "createdByCode": null,
+  "countryIso": "eg",
+  "languageIso": "en",
+  "portalID": 919101829346
+}
