@@ -1,0 +1,20 @@
+{
+    "success": true,
+    "resultCode": 200,
+    "result": {
+        "Code": 875139158568,
+        "UserName": "automation.4c208b27-5c85-4898-8fd5-71be9052d654",
+        "FirstName": "Automation",
+        "LastName": "API",
+        "Email": "automation.4c208b27-5c85-4898-8fd5-71be9052d654@nagwa.com",
+        "BirthDate": "1988-06-17T00:00:00",
+        "Country": "eg",
+        "Language": "en",
+        "AccountStatus": "Verified",
+        "NeedPasswordReset": 0,
+        "active": true
+    },
+    "errors": [
+        
+    ]
+}

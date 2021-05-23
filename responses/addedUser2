@@ -1,0 +1,19 @@
+{
+    "success": true,
+    "resultCode": 200,
+    "result": [
+        {
+            "code": 828165146717,
+            "firstName": "Automation",
+            "lastName": "API",
+            "email": "automation.d7310669-28ef-40d0-a4dd-2780a8819612@nagwa.com",
+            "userName": "automation.d7310669-28ef-40d0-a4dd-2780a8819612",
+            "birthDate": "1988-06-17T00:00:00",
+            "plainPassword": "123456",
+            "verificationToken": "ea151293-7e17-4c87-bedc-4438171de555"
+        }
+    ],
+    "errors": [
+        
+    ]
+}

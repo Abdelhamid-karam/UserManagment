@@ -1,0 +1,60 @@
+{
+    "success": true,
+    "resultCode": 200,
+    "result": [
+        {
+            "userCode": 828165146717,
+            "user": {
+                "code": 828165146717,
+                "userName": "automation.d7310669-28ef-40d0-a4dd-2780a8819612",
+                "firstName": "Automation",
+                "lastName": "API",
+                "email": "automation.d7310669-28ef-40d0-a4dd-2780a8819612@nagwa.com",
+                "birthDate": "1988-06-17T00:00:00",
+                "country": "eg",
+                "language": "en",
+                "accountStatus": "Verified",
+                "needPasswordReset": 0,
+                "active": true
+            },
+            "error": ""
+        },
+        {
+            "userCode": 860171480750,
+            "user": {
+                "code": 860171480750,
+                "userName": "automation.dd242122-fd04-4b08-ace4-e3f4ceac7dbd",
+                "firstName": "update",
+                "lastName": "update",
+                "email": "automation.dd242122-fd04-4b08-ace4-e3f4ceac7dbd@portal.com",
+                "birthDate": null,
+                "country": "eg",
+                "language": "en",
+                "accountStatus": "Verified",
+                "needPasswordReset": 1,
+                "active": true
+            },
+            "error": ""
+        },
+        {
+            "userCode": 582171497589,
+            "user": {
+                "code": 582171497589,
+                "userName": "c3e53@",
+                "firstName": "Automation",
+                "lastName": "API",
+                "email": null,
+                "birthDate": "2019-05-28T11:47:57.734",
+                "country": "eg",
+                "language": "en",
+                "accountStatus": "Verified",
+                "needPasswordReset": 0,
+                "active": true
+            },
+            "error": ""
+        }
+    ],
+    "errors": [
+        
+    ]
+}

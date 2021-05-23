@@ -1,0 +1,19 @@
+{
+    "success": true,
+    "resultCode": 200,
+    "result": [
+        {
+            "code": 582171497589,
+            "firstName": "Automation",
+            "lastName": "API",
+            "email": null,
+            "userName": "c3e53@",
+            "birthDate": "2019-05-28T11:47:57.734Z",
+            "plainPassword": null,
+            "verificationToken": null
+        }
+    ],
+    "errors": [
+        
+    ]
+}

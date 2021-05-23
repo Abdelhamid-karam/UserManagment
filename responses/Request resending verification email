@@ -1,0 +1,10 @@
+{
+    "success": true,
+    "resultCode": 200,
+    "result": {
+        "VerificationToken": "ea151293-7e17-4c87-bedc-4438171de555"
+    },
+    "errors": [
+        
+    ]
+}

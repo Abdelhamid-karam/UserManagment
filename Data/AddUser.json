@@ -1,0 +1,91 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"properties": {
+		"success": {
+			"type": "boolean"
+		},
+		"resultCode": {
+			"type": "integer"
+		},
+		"result": {
+			"type": "array",
+			"items": [
+				{
+					"type": "object",
+					"properties": {
+						"code": {
+							"type": "integer"
+						},
+						"firstName": {
+							"type": "string"
+						},
+						"lastName": {
+							"type": "string"
+						},
+						"email": {
+							"anyOf": [
+								{
+									"type": "null"
+								},
+								{
+									"type": "string"
+								}
+							]
+						},
+						"userName": {
+							"type": "string"
+						},
+						"birthDate": {
+							"type": "string"
+						},
+						"plainPassword": {
+							"anyOf": [
+								{
+									"type": "null"
+								},
+								{
+									"type": "string"
+								}
+							]
+						},
+						"verificationToken": {
+							"anyOf": [
+								{
+									"type": "null"
+								},
+								{
+									"type": "string"
+								}
+							]
+						}
+					},
+					"required": [
+						"code",
+						"firstName",
+						"lastName",
+						"email",
+						"userName",
+						"birthDate",
+						"plainPassword",
+						"verificationToken"
+					]
+				}
+			]
+		},
+		"errors": {
+			"type": "array",
+			"items": [
+				{
+					"type": "string"
+				}
+			]
+		}
+	},
+	"required": [
+		"success",
+		"resultCode",
+		"result",
+		"errors"
+	]
+}

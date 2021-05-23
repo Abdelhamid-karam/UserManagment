@@ -1,0 +1,19 @@
+{
+    "success": true,
+    "resultCode": 200,
+    "result": [
+        {
+            "code": 860171480750,
+            "firstName": "Automation",
+            "lastName": "API",
+            "email": "automation.dd242122-fd04-4b08-ace4-e3f4ceac7dbd@portal.com",
+            "userName": "automation.dd242122-fd04-4b08-ace4-e3f4ceac7dbd",
+            "birthDate": "2019-05-28T11:47:57.734Z",
+            "plainPassword": null,
+            "verificationToken": null
+        }
+    ],
+    "errors": [
+        
+    ]
+}

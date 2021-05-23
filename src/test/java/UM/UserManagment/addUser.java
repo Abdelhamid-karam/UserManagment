@@ -1,95 +1,139 @@
 package UM.UserManagment;
 
+import static io.restassured.RestAssured.given;
+import static org.junit.Assert.assertNotNull;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.InputStreamReader;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.HttpClientBuilder;
+import java.util.UUID;
+
 import UM.sharedSteps.sharedSteps;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
-import gherkin.deps.com.google.gson.JsonObject;
-import gherkin.deps.com.google.gson.JsonParser;
-import org.apache.http.client.methods.HttpPost;
 
+import io.restassured.RestAssured;
 
+public class addUser {
 
-public class addUser{
-
-	String User;
-	StringBuffer UserResult = new StringBuffer();
-
-	@Given("^I have user data$")
-	public void get_user_data() throws Throwable {
-		File UserData = new File("./data/AddUser.txt"); 
-		String line=null;
-		try {
-				BufferedReader br = new BufferedReader(new FileReader(UserData));
-				while ((line= br.readLine()) != null)
-				{	
-					UserResult.append(line);
-				}
-				User = UserResult.toString();
-				br.close();
-			}
-		catch (Exception e) {
-			e.printStackTrace();
+	String API_body;
+	String Nagwa_portal_id = "464161291713"; // nagwa portal ID that its configured in config file of development project same in all environments  
+	String created_by_id ="206179704078"; // id for walaa.akram@nagwa.com on beta, demo and live
+	String uniqueID ; // used to give unique username and email 
+	String user_form ; // variable sent from feature file according to it we will send specific user body 
+	String user_code ;
+	String user_name ;
+	String user_email;
+	
+//form add user API body according to its specifications sent from feature file 
+	@Given("^I have user data \"([^\"]+)\"$")
+	public void get_user_data(String userform) throws Throwable {
+		uniqueID  = UUID.randomUUID().toString();// used to give unique username and email 
+		user_form = userform;
+		String portal_id=sharedSteps.readFileAsString("./data/portal_ID");
+		
+		if (user_form.equalsIgnoreCase("without_email_createdBy_onPortal")) {// if user is student > user name will be auto generated and it will be verified by default no verificationToken will be sent in response body
+			System.out.println("user : " + userform);
+		    API_body ="{\r\n" + 
+					"   \"users\": [\r\n" + 
+					"    {\r\n" + 
+					"       \"firstName\": \"Automation\",\r\n" + 
+					"       \"lastName\": \"API\",\r\n" + 
+					"       \"birthDate\": \"2019-05-28T11:47:57.734Z\"\r\n" + 
+					"    }\r\n" + 
+					"   ],\r\n" + 
+					"   \"createdByCode\": " + created_by_id + ",\r\n" + 
+					"   \"countryIso\": \"eg\",\r\n" + 
+					"   \"languageIso\": \"en\",\r\n" + 
+					"   \"portalID\": \" "+ portal_id + "\"\r\n" + 
+					"}";  
+		}else if(user_form.equalsIgnoreCase("with_email_notCreatedBy_onNagwa")) { // with email can be admin, teacher , co-teacher , educator and account will need to be verified so verificationToken will be sent in response body
+			System.out.println("user : " + userform); 
+		    API_body ="{\r\n" + 
+		    		"   \"users\": [\r\n" + 
+		    		"    {\r\n" + 
+		    		"       \"firstName\": \"Automation\",\r\n" + 
+		    		"       \"lastName\": \"API\",\r\n" + 
+		    		"       \"email\": \"automation." + uniqueID + "@nagwa.com\",\r\n" + 
+		    		"       \"userName\": \"automation." + uniqueID + "\",\r\n" + 
+		    		"       \"birthDate\": \"1988-06-17\",\r\n" + 
+		    		"       \"plainPassword\": \"123456\"\r\n" + 
+		    		"    }\r\n" + 
+		    		"   ],\r\n" + 
+		    		"   \"createdByCode\": null,\r\n" + 
+		    		"   \"countryIso\": \"eg\",\r\n" + 
+		    		"   \"languageIso\": \"en\",\r\n" + 
+		    		"   \"portalID\": "+ Nagwa_portal_id +"\r\n" + 
+		    		"}";
+		}else if (user_form.equalsIgnoreCase("with_email_createdBy_onPortal")) {// with email and created by not null  can be teacher , co-teacher , educator and account will be verified by default no verificationToken will be sent in response body
+			 System.out.println("user : " + userform.toString());
+			    API_body ="{\r\n" + 
+						"   \"users\": [\r\n" + 
+						"    {\r\n" + 
+						"       \"firstName\": \"Automation\",\r\n" + 
+						"       \"lastName\": \"API\",\r\n" + 
+						"       \"email\": \"automation." + uniqueID + "@portal.com\",\r\n" + 
+			    		"       \"userName\": \"automation." + uniqueID + "\",\r\n" + 
+						"       \"birthDate\": \"2019-05-28T11:47:57.734Z\",\r\n" +  
+						"    }\r\n" + 
+						"   ],\r\n" + 
+						"   \"createdByCode\": " + created_by_id + ",\r\n" + 
+						"   \"countryIso\": \"eg\",\r\n" + 
+						"   \"languageIso\": \"en\",\r\n" + 
+						"   \"portalID\": \" "+ portal_id + "\"\r\n" + 
+						"}";  
+		}else {
+			System.out.println("something went wrong o-O"); 
 		}
-		
-		
-		System.out.println("User Data :"+ UserResult);
 	}
 	
-	  @When("^I call add user api$")
-	  public void add_user() throws Throwable {
-		  sharedSteps.get_url();
-		  HttpClient client = HttpClientBuilder.create().build();
-		  URIBuilder builder = new URIBuilder(sharedSteps.url+"User/Add");		  
-		  HttpPost request = new HttpPost(builder.build());
-			// add request header
-		  request.addHeader("Authorization", sharedSteps.token);
-		  request.addHeader("Content-Type", "application/json");
-		  JsonParser parser = new JsonParser();
-	      Object resultObject = parser.parse(User);
-	      JsonObject userJson =(JsonObject)resultObject;
-	      userJson.get("users").getAsJsonArray().get(0).getAsJsonObject().addProperty("email", sharedSteps.Unique_Email);
-	      userJson.get("users").getAsJsonArray().get(0).getAsJsonObject().addProperty("userName", sharedSteps.Unique_username);
-	      System.out.println("user after parsing ="+userJson.toString());
-          request.setEntity(new StringEntity(userJson.toString(),ContentType.create("application/json")));    
-		  sharedSteps.response = client.execute(request);	 
-		  System.out.println("Response Code : " + sharedSteps.response.getStatusLine().getStatusCode());
+	// calling add user API function to use it with different body data  
+	public void  add_User_function() throws Exception {
+		sharedSteps.get_url();
+		RestAssured.baseURI = sharedSteps.url;
+		sharedSteps.response =
+		    		given()
+		    		 .auth()
+		    		 .oauth2(sharedSteps.token)
+		    		 .header("api-version", sharedSteps.ApiVersion)
+		    		 .contentType("application/json")
+		    		 .body(API_body)
+		    		.when()
+		    		 .post("/User/Add")
+		    	    .then()
+		    		 .extract().response();
+		user_code = sharedSteps.response.path("result.code").toString();
+		user_name = sharedSteps.response.path("result.userName").toString();
+	    user_email = sharedSteps.response.path("result.email").toString();
+					
+					
+	}
 
-		  BufferedReader rd = new BufferedReader(new InputStreamReader(sharedSteps.response.getEntity().getContent()));
-		  String line = "";
-		  StringBuffer result = new StringBuffer();
-		  while ((line = rd.readLine()) != null) 
-		      {
-			  result.append(line);
-			  }
-		  sharedSteps.responseContent= result.toString();
-	      System.out.println("Response: "+sharedSteps.responseContent);
-	      
+	@When("^I call add user api$")
+	public void add_user() throws Throwable {
+		 
+		 
+		
+		if (user_form.equalsIgnoreCase("without_email_createdBy_onPortal")) {// no verificationToken with response code 207 cuz dependant account 
+		    add_User_function();
+			sharedSteps.write_into_FileAsString("./data/User1_code", user_code.substring(1, user_code.length()-1));
+			sharedSteps.write_into_FileAsString("./data/User1_userName", user_name.substring(1, user_name.length()-1));
+    		sharedSteps.write_into_FileAsString("./responses/addedUser1", sharedSteps.response.prettyPrint());	
+		}
+		else if(user_form.equalsIgnoreCase("with_email_notCreatedBy_onNagwa")) { // verificationToken will be sent with response code 200 cuz not dependant account   
+			 add_User_function();
+   		     System.out.println("verificationToken " + sharedSteps.response.path("result.verificationToken").toString()); 
+   		     assertNotNull(sharedSteps.response.path("result.verificationToken").toString());
+   		     sharedSteps.write_into_FileAsString("./data/User2_verificationToken", sharedSteps.response.path("result.VerificationToken").toString());
+   		     sharedSteps.write_into_FileAsString("./data/User2_code", user_code.substring(1, user_code.length()-1));
+   		     sharedSteps.write_into_FileAsString("./data/User2_email", user_email.substring(1, user_email.length()-1));
+   		     sharedSteps.write_into_FileAsString("./data/User2_username", user_name.substring(1, user_name.length()-1));
+   	      	 sharedSteps.write_into_FileAsString("./responses/addedUser2", sharedSteps.response.prettyPrint());
+		}
+		else if (user_form.equalsIgnoreCase("with_email_createdBy_onPortal")) {// no verificationToken with response code 200 cuz dependant account 
+			 add_User_function();
+			 sharedSteps.write_into_FileAsString("./data/User3_code", user_code.substring(1, user_code.length()-1));
+    		 sharedSteps.write_into_FileAsString("./responses/addedUser3", sharedSteps.response.prettyPrint());
+		}else {
+			System.out.println("something went wrong o-O"); 
+		}
+	}
 
-			JsonParser parser1 = new JsonParser();
-	        Object resultObject1 = parser1.parse(sharedSteps.responseContent);
-		     System.out.println("Parsed: "+resultObject1);
-	        JsonObject obj1 =(JsonObject)resultObject1;
-	        sharedSteps.Verify_token=  obj1.get("result").getAsJsonArray().get(0).getAsJsonObject().get("verificationToken");
-	        System.out.println("verify token  = "+ sharedSteps.Verify_token);
-		  BufferedWriter writer = new BufferedWriter(new FileWriter("./responses/addedUser"));
-		  writer.write(sharedSteps.responseContent);
-		  writer.close();
-		  parser1 = new JsonParser();
-	      resultObject1 = parser1.parse(sharedSteps.responseContent);
-	      sharedSteps.jsonResponse =(JsonObject)resultObject1;
-	  }
-	
-	
 }

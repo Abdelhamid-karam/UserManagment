@@ -1,0 +1,43 @@
+{
+    "success": true,
+    "resultCode": 200,
+    "result": [
+        {
+            "userNameOREmail": "automation.d7310669-28ef-40d0-a4dd-2780a8819612@nagwa.com",
+            "user": {
+                "code": 828165146717,
+                "userName": "automation.d7310669-28ef-40d0-a4dd-2780a8819612",
+                "firstName": "Automation",
+                "lastName": "API",
+                "email": "automation.d7310669-28ef-40d0-a4dd-2780a8819612@nagwa.com",
+                "birthDate": "1988-06-17T00:00:00",
+                "country": "eg",
+                "language": "en",
+                "accountStatus": "Verified",
+                "needPasswordReset": 0,
+                "active": true
+            },
+            "error": ""
+        },
+        {
+            "userNameOREmail": null,
+            "user": {
+                "code": 582171497589,
+                "userName": "c3e53@",
+                "firstName": "Automation",
+                "lastName": "API",
+                "email": null,
+                "birthDate": "2019-05-28T11:47:57.734",
+                "country": "eg",
+                "language": "en",
+                "accountStatus": "Verified",
+                "needPasswordReset": 0,
+                "active": true
+            },
+            "error": ""
+        }
+    ],
+    "errors": [
+        
+    ]
+}

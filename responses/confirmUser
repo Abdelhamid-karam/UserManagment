@@ -1,1 +1,8 @@
-{"success":true,"resultCode":200,"result":405147631732,"errors":[]}
+{
+    "success": true,
+    "resultCode": 400,
+    "result": null,
+    "errors": [
+        "Already verified user"
+    ]
+}

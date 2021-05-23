@@ -1,0 +1,8 @@
+{
+    "success": false,
+    "resultCode": 400,
+    "result": null,
+    "errors": [
+        "The username entered either has a wrong suffix or no suffix at all"
+    ]
+}

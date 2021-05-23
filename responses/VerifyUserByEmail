@@ -1,0 +1,14 @@
+{
+    "success": true,
+    "resultCode": 200,
+    "result": {
+        "userID": 828165146717,
+        "accountStatus": "Verified",
+        "needPasswordReset": false,
+        "Active": true,
+        "portalID": 387193426284
+    },
+    "errors": [
+        
+    ]
+}

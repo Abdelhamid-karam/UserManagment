@@ -1,0 +1,8 @@
+{
+    "success": false,
+    "resultCode": 400,
+    "result": null,
+    "errors": [
+        "Error, User can't be linked to multiple portals."
+    ]
+}

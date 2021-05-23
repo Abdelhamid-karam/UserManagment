@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "resultCode": {
+      "type": "integer"
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "PortalID": {
+          "type": "integer"
+        },
+        "Code": {
+          "type": "integer"
+        },
+        "UserName": {
+          "type": "string"
+        },
+        "FirstName": {
+          "type": "string"
+        },
+        "LastName": {
+          "type": "string"
+        },
+        "Email": {
+          "type": "string"
+        },
+        "BirthDate": {
+          "type": "string"
+        },
+        "Language": {
+          "type": "string"
+        },
+        "Country": {
+          "type": "string"
+        },
+        "AccountStatus": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "PortalID",
+        "Code",
+        "UserName",
+        "FirstName",
+        "LastName",
+        "Email",
+        "BirthDate",
+        "Language",
+        "Country",
+        "AccountStatus"
+      ]
+    },
+    "errors": {
+      "type": "array",
+      "items": {}
+    }
+  },
+  "required": [
+    "success",
+    "resultCode",
+    "result",
+    "errors"
+  ]
+}

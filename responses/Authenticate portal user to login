@@ -1,0 +1,8 @@
+{
+    "success": false,
+    "resultCode": 403,
+    "result": null,
+    "errors": [
+        "You don't have access to {0} portal."
+    ]
+}
