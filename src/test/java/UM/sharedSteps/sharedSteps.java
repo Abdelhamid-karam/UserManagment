@@ -19,7 +19,7 @@ import java.nio.file.Paths;
 
 
 public class sharedSteps {
-	public static String auth_URL = "https://auth.nagwa.com/connect/token";
+	public static String auth_URL = "URL";
 	public static String url;
 	public static Response response;
 	public static String token;
