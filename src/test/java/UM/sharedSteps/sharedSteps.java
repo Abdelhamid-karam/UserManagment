@@ -47,9 +47,9 @@ public class sharedSteps {
          Response auth_response  = 
 		 given()
 			.param("client_id", "usermanagement.client")
-			.param("client_secret", "Xn2AfMw3ZhjDkXXMPD4FRa6amNQNHFWRyrZ5Sb9e")
+			.param("client_secret", "-----------")
 			.param("scope", "UserManagementApi")
-			.param("grant_type", "client_credentials")
+			.param("grant_type", "---------")
 		.when()
 			.post()
 		.then()
